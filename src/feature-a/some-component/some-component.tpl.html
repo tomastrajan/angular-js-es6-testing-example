@@ -1,0 +1,55 @@
+<div class="jumbotron">
+    <h1>Feature A!</h1>
+    <h2>Feature A is implemented as Component using
+        "<a href="https://medium.com/@tomastrajan/component-paradigm-cf32e94ba78b">Component Pattern</a>"
+    </h2>
+    <br />
+    <p>Feature A is so great that it even contains counter functionality!</p>
+    <ul>
+        <li><p>Counter: <strong>{{ctrl.counter}}</strong></p></li>
+    </ul>
+    <br />
+    <p>The implemented counter functionality is tested in isolation without instantiating of Angular JS context</p>
+    <br />
+    <hr />
+    <!--<button class="btn btn-info pull-right" ui-sref="app.feature-b">Try Feature B</button>-->
+    <button class="btn btn-success" ng-click="ctrl.increment()">Increment counter</button>
+    <a class="btn btn-default" data-toggle="collapse" href="#testCode" aria-expanded="false" aria-controls="collapseExample">Toggle test code</a>
+    <br />
+    <br />
+    <pre class="collapse" id="testCode">
+    <code class="javascript">
+        import { assert } from 'chai';
+
+        import SomeComponent from './some-component';
+
+        let component;
+
+        describe('some-component', function() {
+
+            beforeEach(function() {
+                component = new SomeComponent();
+            });
+
+            it('should start with counter value 20', function () {
+                assert.equal(component.counter, 20);
+            });
+
+            it('should accept initial counter value as dependency', function () {
+                component = new SomeComponent(30);
+                assert.equal(component.counter, 30);
+            });
+
+            it('should increment counter value after increment is called', function () {
+                assert.equal(component.counter, 20);
+                component.increment();
+                assert.equal(component.counter, 21);
+            });
+
+        });
+    </code>
+    </pre>
+
+
+
+</div>
