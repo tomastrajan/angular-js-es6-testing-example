@@ -3,6 +3,11 @@ export function routing($stateProvider) {
     $stateProvider
         .state('app.feature-b', {
             url: '/feature-b',
-            template: '<div todo-component></div>'
+            template: '<div todo-component></div>',
+            resolve: {
+                initialTodos: function() {
+                    return [];
+                }
+            }
         });
 }
