@@ -1,0 +1,112 @@
+<div class="jumbotron">
+
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Feature B!</h1>
+            <h2>Feature B is implementation of simple Todo app</h2>
+        </div>
+    </div>
+
+    <br />
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <label>Todos</label>
+            <ul ng-if="ctrl.todos.length">
+                <li class="todo" ng-repeat="todo in ctrl.todos" ng-click="ctrl.toggleTodo(todo);">
+                    <i ng-show="todo.done" class="done fa fa-check-circle fa-lg"></i>
+                    <i ng-show="!todo.done" class="fa fa-circle-o fa-lg"></i>
+                    {{todo.label}}
+                </li>
+            </ul>
+            <p ng-if="!ctrl.todos.length">No `todos` yet, try to add some...</p>
+        </div>
+        <div class="col-md-3">
+            <form>
+                <label>Label</label>
+                <input class="form-control" ng-model="ctrl.label">
+            </form>
+        </div>
+        <div class="col-md-3">
+            <form>
+                <label>Actions</label>
+                <button class="btn btn-success btn-block" ng-click="ctrl.addTodo()" ng-disabled="!ctrl.label.length">
+                    <i class="fa fa-plus fa-lg"></i> Add todo
+                </button>
+                <button class="btn btn-danger btn-block" ng-click="ctrl.removeDoneTodos()">
+                    <i class="fa fa-trash fa-lg"></i> Remove done todos
+                </button>
+            </form>
+        </div>
+        <div class="col-md-12">
+            <br />
+            <br />
+            <p>The functionality implemnted in <strong>TodoService</strong> is tested in isolation without instantiating of Angular JS context</p>
+        </div>
+    </div>
+
+    <hr />
+    <br />
+
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-info pull-right" ui-sref="app.feature-a">Try Feature A</button>
+            <a class="btn btn-default" data-toggle="collapse" href="#serviceTestCode" aria-expanded="false" aria-controls="serviceTestCode">Toggle service test code</a>
+
+            <br />
+            <br />
+            <pre class="collapse" id="serviceTestCode">
+            <code class="javascript">
+                import { assert } from 'chai';
+
+                import TodoService from './todo.service.js';
+
+                let service;
+
+                describe('TodoService', function() {
+
+                    beforeEach(function() {
+                        service = TodoService();
+                    });
+
+                    it('should contain empty todos after initialization', function () {
+                        assert.equal(service.todos.length, 0);
+                    });
+
+                    it('should add todo', function () {
+                        service.addTodo('Finish example project');
+                        assert.equal(service.todos.length, 1);
+                        assert.equal(service.todos[0].label, 'Finish example project');
+                        assert.equal(service.todos[0].done, false);
+                    });
+
+                    it('should toggle todo', function () {
+                        service.addTodo('Finish example project');
+                        assert.equal(service.todos[0].done, false);
+
+                        service.toggleTodo('Finish example project');
+                        assert.equal(service.todos[0].done, true);
+
+                        service.toggleTodo('Finish example project');
+                        assert.equal(service.todos[0].done, false);
+                    });
+
+                    it('should remove done todos', function () {
+                        service.addTodo('Todo1');
+                        service.addTodo('Todo2');
+                        service.addTodo('Todo3');
+                        assert.equal(service.todos.length, 3);
+
+                        service.toggleTodo('Todo1');
+                        service.removeDoneTodos();
+                        assert.equal(service.todos.length, 2);
+                    });
+
+                });
+            </code>
+            </pre>
+        </div>
+    </div>
+
+</div>
