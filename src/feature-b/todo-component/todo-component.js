@@ -4,6 +4,8 @@ export default class TodoComponent {
         this.TodoService = TodoService;
         this.todos = TodoService.todos;
         this.label = '';
+
+        this.collapse = [true, true, true];
     }
 
     addTodo() {
@@ -17,6 +19,14 @@ export default class TodoComponent {
 
     removeDoneTodos() {
         this.TodoService.removeDoneTodos();
+    }
+
+    toggleCollapse(index) {
+        let originalValue = this.collapse[index];
+        this.collapse.forEach((item, i) => {
+            this.collapse[i] = true;
+        });
+        this.collapse[index] = !originalValue;
     }
 
 }

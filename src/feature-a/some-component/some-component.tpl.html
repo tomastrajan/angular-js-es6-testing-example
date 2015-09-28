@@ -12,44 +12,45 @@
     <p>The implemented counter functionality is tested in isolation without instantiating of Angular JS context</p>
     <br />
     <hr />
+
     <button class="btn btn-info pull-right" ui-sref="app.feature-b">Try Feature B</button>
     <button class="btn btn-success" ng-click="ctrl.increment()">Increment counter</button>
     <a class="btn btn-default" data-toggle="collapse" href="#testCode" aria-expanded="false" aria-controls="collapseExample">Toggle test code</a>
+
     <br />
     <br />
-    <pre class="collapse" id="testCode">
-    <code class="javascript">
-        import { assert } from 'chai';
 
-        import SomeComponent from './some-component';
+    <div class="collapse" id="testCode">
+        <code hljs language="javascript">
+            import { assert } from 'chai';
 
-        let component;
+            import SomeComponent from './some-component';
 
-        describe('some-component', function() {
+            let component;
 
-            beforeEach(function() {
-                component = new SomeComponent();
+            describe('some-component', function() {
+
+                beforeEach(function() {
+                    component = new SomeComponent();
+                });
+
+                it('should start with counter value 20', function () {
+                    assert.equal(component.counter, 20);
+                });
+
+                it('should accept initial counter value as dependency', function () {
+                    component = new SomeComponent(30);
+                    assert.equal(component.counter, 30);
+                });
+
+                it('should increment counter value after increment is called', function () {
+                    assert.equal(component.counter, 20);
+                    component.increment();
+                    assert.equal(component.counter, 21);
+                });
+
             });
-
-            it('should start with counter value 20', function () {
-                assert.equal(component.counter, 20);
-            });
-
-            it('should accept initial counter value as dependency', function () {
-                component = new SomeComponent(30);
-                assert.equal(component.counter, 30);
-            });
-
-            it('should increment counter value after increment is called', function () {
-                assert.equal(component.counter, 20);
-                component.increment();
-                assert.equal(component.counter, 21);
-            });
-
-        });
-    </code>
-    </pre>
-
-
+        </code>
+    </div>
 
 </div>

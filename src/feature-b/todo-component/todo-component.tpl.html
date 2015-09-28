@@ -50,62 +50,198 @@
     <br />
 
     <div class="row">
-        <div class="col-md-12">
+        <div id="examples" class="col-md-12">
             <button class="btn btn-info pull-right" ui-sref="app.feature-a">Try Feature A</button>
-            <a class="btn btn-default" data-toggle="collapse" href="#serviceTestCode" aria-expanded="false" aria-controls="serviceTestCode">Toggle service test code</a>
+            <a class="btn btn-default" ng-class="{'btn-success': !ctrl.collapse[0]}"  ng-click="ctrl.toggleCollapse(0)">
+                {{ctrl.collapse[0] ? 'Show' : 'Hide'}} service test code
+            </a>
+            <a class="btn btn-default" ng-class="{'btn-success': !ctrl.collapse[1]}" ng-click="ctrl.toggleCollapse(1)">
+                {{ctrl.collapse[1] ? 'Show' : 'Hide'}} component test code
+            </a>
+            <a class="btn btn-default" ng-class="{'btn-success': !ctrl.collapse[2]}"  ng-click="ctrl.toggleCollapse(2)">
+                {{ctrl.collapse[2] ? 'Show' : 'Hide'}} component integration test code
+            </a>
 
             <br />
             <br />
-            <pre class="collapse" id="serviceTestCode">
-            <code class="javascript">
-                import { assert } from 'chai';
 
-                import TodoService from './todo.service.js';
+            <div collapse="ctrl.collapse[0]">
+                <code hljs language="javascript">
+                    import { assert } from 'chai';
 
-                let service;
+                    import TodoService from './todo.service.js';
 
-                describe('TodoService', function() {
+                    let service;
 
-                    beforeEach(function() {
-                        service = TodoService();
+                    describe('TodoService', function() {
+
+                        beforeEach(function() {
+                            service = TodoService();
+                        });
+
+                        it('should contain empty todos after initialization', function () {
+                            assert.equal(service.todos.length, 0);
+                        });
+
+                        it('should add todo', function () {
+                            service.addTodo('Finish example project');
+                            assert.equal(service.todos.length, 1);
+                            assert.equal(service.todos[0].label, 'Finish example project');
+                            assert.equal(service.todos[0].done, false);
+                        });
+
+                        it('should toggle todo', function () {
+                            service.addTodo('Finish example project');
+                            assert.equal(service.todos[0].done, false);
+
+                            service.toggleTodo('Finish example project');
+                            assert.equal(service.todos[0].done, true);
+
+                            service.toggleTodo('Finish example project');
+                            assert.equal(service.todos[0].done, false);
+                        });
+
+                        it('should remove done todos', function () {
+                            service.addTodo('Todo1');
+                            service.addTodo('Todo2');
+                            service.addTodo('Todo3');
+                            assert.equal(service.todos.length, 3);
+
+                            service.toggleTodo('Todo1');
+                            service.removeDoneTodos();
+                            assert.equal(service.todos.length, 2);
+                        });
+
                     });
+                </code>
+            </div>
 
-                    it('should contain empty todos after initialization', function () {
-                        assert.equal(service.todos.length, 0);
+            <div collapse="ctrl.collapse[1]">
+                <code hljs language="javascript">
+                    import { assert } from 'chai';
+                    import * as sinon from 'sinon';
+
+                    import TodoComponent from './todo-component.js';
+                    import TodoService from '../services/todo.service.js';
+
+                    let component;
+                    let mockTodoService;
+
+                    describe('TodoComponent with mocked service (unit test)', function() {
+
+                        beforeEach(function() {
+                            let initialTodos = [];
+                            let TodoServiceInstance = TodoService(initialTodos);
+                            mockTodoService = sinon.mock(TodoServiceInstance);
+                            component = new TodoComponent(TodoServiceInstance);
+                        });
+
+                        afterEach(function() {
+                            mockTodoService.restore();
+                        });
+
+                        it('should add todo', function () {
+                            mockTodoService
+                                .expects('addTodo')
+                                .once()
+                                .withArgs('Finish example project');
+
+                            component.label = 'Finish example project';
+                            component.addTodo();
+
+                            mockTodoService.verify();
+                        });
+
+                        it('should toggle todo', function () {
+                            let mockTodo = {label: 'Add unit tests', done: false};
+                            mockTodoService
+                                .expects('toggleTodo')
+                                .twice()
+                                .withArgs(mockTodo.label);
+
+                            component.toggleTodo(mockTodo);
+                            component.toggleTodo(mockTodo);
+
+                            mockTodoService.verify();
+                        });
+
+                        it('should remove done todos', function () {
+                            mockTodoService
+                                .expects('removeDoneTodos')
+                                .once();
+
+                            component.removeDoneTodos();
+
+                            mockTodoService.verify();
+                        });
+
                     });
+                </code>
+            </div>
 
-                    it('should add todo', function () {
-                        service.addTodo('Finish example project');
-                        assert.equal(service.todos.length, 1);
-                        assert.equal(service.todos[0].label, 'Finish example project');
-                        assert.equal(service.todos[0].done, false);
+            <div collapse="ctrl.collapse[2]">
+                <code hljs language="javascript">
+                    import { assert } from 'chai';
+
+                    import TodoComponent from './todo-component.js';
+                    import TodoService from '../services/todo.service.js';
+
+                    let component;
+
+                    describe('TodoComponent with real service (Integration test)', function() {
+
+                        beforeEach(function() {
+                            let initialTodos = [];
+                            let todoService = TodoService(initialTodos);
+                            component = new TodoComponent(todoService);
+                        });
+
+                        it('should contain reference to service\'s todos', function () {
+                            assert.equal(component.todos.length, 0);
+                        });
+
+                        it('should add todo', function () {
+                            component.label = 'Finish example project';
+                            component.addTodo();
+                            assert.equal(component.label, '');
+                            assert.equal(component.todos.length, 1);
+                            assert.equal(component.todos[0].label, 'Finish example project');
+                            assert.equal(component.todos[0].done, false);
+                        });
+
+                        it('should toggle todo', function () {
+                            component.label = 'Finish example project';
+                            component.addTodo();
+                            assert.equal(component.todos[0].done, false);
+
+                            component.toggleTodo(component.todos[0]);
+                            assert.equal(component.todos[0].done, true);
+
+                            component.toggleTodo(component.todos[0]);
+                            assert.equal(component.todos[0].done, false);
+                        });
+
+                        it('should remove done todos', function () {
+                            component.label = 'Todo1';
+                            component.addTodo();
+
+                            component.label = 'Todo2';
+                            component.addTodo();
+
+                            component.label = 'Todo2';
+                            component.addTodo();
+
+                            assert.equal(component.todos.length, 3);
+
+                            component.toggleTodo(component.todos[0]);
+                            component.removeDoneTodos();
+                            assert.equal(component.todos.length, 2);
+                        });
+
                     });
+                </code>
+            </div>
 
-                    it('should toggle todo', function () {
-                        service.addTodo('Finish example project');
-                        assert.equal(service.todos[0].done, false);
-
-                        service.toggleTodo('Finish example project');
-                        assert.equal(service.todos[0].done, true);
-
-                        service.toggleTodo('Finish example project');
-                        assert.equal(service.todos[0].done, false);
-                    });
-
-                    it('should remove done todos', function () {
-                        service.addTodo('Todo1');
-                        service.addTodo('Todo2');
-                        service.addTodo('Todo3');
-                        assert.equal(service.todos.length, 3);
-
-                        service.toggleTodo('Todo1');
-                        service.removeDoneTodos();
-                        assert.equal(service.todos.length, 2);
-                    });
-
-                });
-            </code>
-            </pre>
         </div>
     </div>
 
