@@ -37,7 +37,10 @@ var paramsPerTarget = {
             path: './dist'
         },
         plugins: [
-            new CleanWebpackPlugin(['dist'])
+            new CleanWebpackPlugin(['dist']),
+            new webpack.optimize.UglifyJsPlugin({
+                mangle: false
+            })
         ]
     }
 };
@@ -62,7 +65,7 @@ module.exports = {
             {test: /\.js$/, loader: 'babel?optional[]=runtime&stage=1', exclude: /(\.test.js$|node_modules)/},
             {test: /\.css$/, loader: 'style!css'},
             {test: /\.tpl.html/, loader: 'html'},
-            {test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/, loader: "url?limit=50000"}
+            {test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/, loader: 'url?limit=50000'}
         ]
     },
     plugins: [
@@ -71,8 +74,8 @@ module.exports = {
             inject: 'body'
         }),
         new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
+            $: 'jquery',
+            jQuery: 'jquery'
         })
     ].concat(params.plugins || []),
     devServer: {

@@ -2,7 +2,7 @@ import angular from 'angular';
 import uirouter from 'angular-ui-router';
 
 import { routing } from './feature-b.config.js';
-import { EMPTY_TODOS, DEFAULT_TODOS } from './feature-b.constants.js';
+import { DEFAULT_TODOS } from './feature-b.constants.js';
 
 import todoComponent from './todo-component/todo-component.directive';
 import TodoService from './services/todo.service';
