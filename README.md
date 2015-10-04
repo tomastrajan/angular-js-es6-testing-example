@@ -1,5 +1,8 @@
-# Angular JS ES6 Testing Example
-Enhanced testing of Angular JS 1.X applications using ES6 modules
+# Angular JS ES6 Module Testing Example
+
+* original blog post describing [Proper testing of Angular JS 1.X applications with ES6 modules](https://medium.com/@tomastrajan/proper-testing-of-angular-js-applications-with-es6-modules-8cf31113873f)
+
+![Components](/src/asset/image/testing.png?raw=true "Proper testing of Angular JS 1.X applications with ES6 modules")
 
 ## Getting started
 
