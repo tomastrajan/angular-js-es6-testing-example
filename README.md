@@ -14,10 +14,13 @@
 
 All scripts are run with `npm run [script]`, for example: `npm run test`.
 
-* `test` - run all tests
 * `start` - start development server, try it by opening `http://localhost:8081/webpack-dev-server/index.html`
+
 * `build` - create dev build, check `build` directory
 * `dist` - create production build, check `dist` directory
 
+* `server_build` - serve content from `build` directory
+* `server_dist` - serve content from `dist` directory
 
-
+* `test` - run all unit tests (with Mocha)
+* `karma` - run all integration tests (with Karma / Jasmine)
