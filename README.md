@@ -3,6 +3,7 @@
 * original blog post describing [Proper testing of Angular JS 1.X applications with ES6 modules](https://medium.com/@tomastrajan/proper-testing-of-angular-js-applications-with-es6-modules-8cf31113873f)
 * [demo project](http://tomastrajan.github.io/angular-js-es6-testing-example/) with examples of mocha unit & karma integration tests
 * [presentation](http://slides.com/tomastrajan/angularjs-unit-testing-with-es6-modules) about the concepts used in this repository
+* [video](https://www.youtube.com/watch?v=JTkEsu-cEzc) from Angular JS Meetup Zurich
 
 
 ![Components](/src/asset/image/testing.png?raw=true "Proper testing of Angular JS 1.X applications with ES6 modules")
