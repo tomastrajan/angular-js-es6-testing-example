@@ -5,6 +5,7 @@ var webpack = require('webpack');
 
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
+var OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 
 var PARAMS_DEFAULT = {
     resolve: {
@@ -43,7 +44,10 @@ var PARAMS_PER_TARGET = {
             filename: '[name].js'
         },
         plugins: [
-            new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
+            new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+            new OpenBrowserWebpackPlugin({
+                url: 'http://localhost:' + PARAMS_DEFAULT.devServer.port
+            })
         ]
     },
     BUILD: {
@@ -82,7 +86,7 @@ module.exports = {
     output: params.output,
     module: {
         loaders: [
-            {test: /\.js$/, loader: 'babel?optional[]=runtime&stage=1', exclude: /(\.test.js$|node_modules)/},
+            {test: /\.js$/, loader: 'babel', exclude: /(\.test.js$|node_modules)/},
             {test: /\.css$/, loader: 'style!css'},
             {test: /\.tpl.html/, loader: 'html'},
             {test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/, loader: 'url?limit=50000'}
