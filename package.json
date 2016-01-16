@@ -11,7 +11,7 @@
     "server_dist": "node server.js --TARGET=DIST",
     "test": "mocha --compilers js:babel-register ./src/**/*.test.js",
     "karma": "karma start",
-    "ci": "npm run test && npm run dist"
+    "ci": "npm run test && npm run build"
   },
   "author": "tomas.trajan@gmail.com",
   "license": "ISC",
