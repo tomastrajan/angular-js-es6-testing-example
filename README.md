@@ -1,5 +1,4 @@
-# Angular JS ES6 Module Testing Example
-[![Build Status](https://travis-ci.org/tomastrajan/angular-js-es6-testing-example.svg?branch=master)](https://travis-ci.org/tomastrajan/angular-js-es6-testing-example)
+# Angular JS ES6 Module Testing Example [![Build Status](https://travis-ci.org/tomastrajan/angular-js-es6-testing-example.svg?branch=master)](https://travis-ci.org/tomastrajan/angular-js-es6-testing-example)
 
 * original blog post describing [Proper testing of Angular JS 1.X applications with ES6 modules](https://medium.com/@tomastrajan/proper-testing-of-angular-js-applications-with-es6-modules-8cf31113873f)
 * [demo project](http://tomastrajan.github.io/angular-js-es6-testing-example/) with examples of mocha unit & karma integration tests
