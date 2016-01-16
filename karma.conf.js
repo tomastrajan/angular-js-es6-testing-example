@@ -7,8 +7,8 @@ module.exports = function(config) {
         reporters:  ['mocha'],
 
         logLevel: config.LOG_INFO,
-        autoWatch: true,
-        singleRun: false,
+        autoWatch: false,
+        singleRun: true,
         colors: true,
         port: 9876,
 
