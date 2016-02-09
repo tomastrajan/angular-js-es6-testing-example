@@ -1,4 +1,4 @@
-# Angular JS 1.5 - ES6 Module Unit testing and Karma Integration testing seed [![Build Status](https://travis-ci.org/tomastrajan/angular-js-es6-testing-example.svg?branch=master)](https://travis-ci.org/tomastrajan/angular-js-es6-testing-example)
+# Angular JS 1.5 - ES6 Module Unit testing and Karma Integration testing seed by [@tomastrajan](https://twitter.com/tomastrajan) [![Build Status](https://travis-ci.org/tomastrajan/angular-js-es6-testing-example.svg?branch=master)](https://travis-ci.org/tomastrajan/angular-js-es6-testing-example)
 
 Great seed for enterprise projects with heavy focus on unit and integration testing.
 
