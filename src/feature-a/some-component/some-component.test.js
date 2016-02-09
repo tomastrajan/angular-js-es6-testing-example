@@ -4,7 +4,7 @@ import SomeComponent from './some-component';
 
 let component;
 
-describe('some-component', function() {
+describe('SomeComponent', function() {
 
     beforeEach(function() {
         component = new SomeComponent();

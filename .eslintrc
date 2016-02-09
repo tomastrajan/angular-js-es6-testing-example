@@ -1,0 +1,16 @@
+{
+  "extends": "eslint-config-defaults",
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "jasmine": true
+  },
+  "globals": {
+    "angular": false
+  },
+  "ecmaFeatures": {
+    "modules": true
+  }
+}

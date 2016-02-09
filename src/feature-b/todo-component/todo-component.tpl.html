@@ -13,28 +13,28 @@
     <div class="row">
         <div class="col-md-6">
             <label>Todos</label>
-            <ul ng-if="ctrl.todos.length">
-                <li class="todo" ng-repeat="todo in ctrl.todos" ng-click="ctrl.toggleTodo(todo);">
+            <ul ng-if="$ctrl.todos.length">
+                <li class="todo" ng-repeat="todo in $ctrl.todos" ng-click="$ctrl.toggleTodo(todo);">
                     <i ng-show="todo.done" class="done fa fa-check-circle fa-lg"></i>
                     <i ng-show="!todo.done" class="fa fa-circle-o fa-lg"></i>
                     {{todo.label}}
                 </li>
             </ul>
-            <p ng-if="!ctrl.todos.length">No `todos` yet, try to add some...</p>
+            <p ng-if="!$ctrl.todos.length">No `todos` yet, try to add some...</p>
         </div>
         <div class="col-md-3">
             <form>
                 <label>Label</label>
-                <input class="form-control" ng-model="ctrl.label">
+                <input class="form-control" ng-model="$ctrl.label">
             </form>
         </div>
         <div class="col-md-3">
             <form>
                 <label>Actions</label>
-                <button class="btn btn-success btn-block" ng-click="ctrl.addTodo()" ng-disabled="!ctrl.label.length">
+                <button class="btn btn-success btn-block" ng-click="$ctrl.addTodo()" ng-disabled="!$ctrl.label.length">
                     <i class="fa fa-plus fa-lg"></i> Add todo
                 </button>
-                <button class="btn btn-danger btn-block" ng-click="ctrl.removeDoneTodos()">
+                <button class="btn btn-danger btn-block" ng-click="$ctrl.removeDoneTodos()">
                     <i class="fa fa-trash fa-lg"></i> Remove done todos
                 </button>
             </form>
@@ -52,21 +52,22 @@
     <div class="row">
         <div id="examples" class="col-md-12">
             <button class="btn btn-info pull-right" ui-sref="app.feature-a">Try Feature A</button>
-            <a class="btn btn-default" ng-class="{'btn-success': !ctrl.collapse[0]}"  ng-click="ctrl.toggleCollapse(0)">
-                {{ctrl.collapse[0] ? 'Show' : 'Hide'}} service test code
+            <a class="btn btn-default" ng-class="{'btn-success': !$ctrl.collapse[0]}"  ng-click="$ctrl.toggleCollapse(0)">
+                {{$ctrl.collapse[0] ? 'Show' : 'Hide'}} service test code
             </a>
-            <a class="btn btn-default" ng-class="{'btn-success': !ctrl.collapse[1]}" ng-click="ctrl.toggleCollapse(1)">
-                {{ctrl.collapse[1] ? 'Show' : 'Hide'}} component test code
+            <a class="btn btn-default" ng-class="{'btn-success': !$ctrl.collapse[1]}" ng-click="$ctrl.toggleCollapse(1)">
+                {{$ctrl.collapse[1] ? 'Show' : 'Hide'}} component test code
             </a>
-            <a class="btn btn-default" ng-class="{'btn-success': !ctrl.collapse[2]}"  ng-click="ctrl.toggleCollapse(2)">
-                {{ctrl.collapse[2] ? 'Show' : 'Hide'}} component integration test code
+            <a class="btn btn-default" ng-class="{'btn-success': !$ctrl.collapse[2]}"  ng-click="$ctrl.toggleCollapse(2)">
+                {{$ctrl.collapse[2] ? 'Show' : 'Hide'}} component integration test code
             </a>
 
             <br />
             <br />
 
-            <div collapse="ctrl.collapse[0]">
-                <code hljs language="javascript">
+            <div collapse="$ctrl.collapse[0]">
+                <pre>
+                <code>
                     import { assert } from 'chai';
 
                     import TodoService from './todo.service.js';
@@ -76,7 +77,7 @@
                     describe('TodoService', function() {
 
                         beforeEach(function() {
-                            service = TodoService();
+                            service = new TodoService();
                         });
 
                         it('should contain empty todos after initialization', function () {
@@ -114,10 +115,12 @@
 
                     });
                 </code>
+                </pre>
             </div>
 
-            <div collapse="ctrl.collapse[1]">
-                <code hljs language="javascript">
+            <div collapse="$ctrl.collapse[1]">
+                <pre>
+                <code>
                     import { assert } from 'chai';
                     import * as sinon from 'sinon';
 
@@ -131,7 +134,7 @@
 
                         beforeEach(function() {
                             let initialTodos = [];
-                            let TodoServiceInstance = TodoService(initialTodos);
+                            let TodoServiceInstance = new TodoService(initialTodos);
                             mockTodoService = sinon.mock(TodoServiceInstance);
                             component = new TodoComponent(TodoServiceInstance);
                         });
@@ -177,10 +180,12 @@
 
                     });
                 </code>
+                </pre>
             </div>
 
-            <div collapse="ctrl.collapse[2]">
-                <code hljs language="javascript">
+            <div collapse="$ctrl.collapse[2]">
+                <pre>
+                <code>
                     import { assert } from 'chai';
 
                     import TodoComponent from './todo-component.js';
@@ -192,7 +197,7 @@
 
                         beforeEach(function() {
                             let initialTodos = [];
-                            let todoService = TodoService(initialTodos);
+                            let todoService = new TodoService(initialTodos);
                             component = new TodoComponent(todoService);
                         });
 
@@ -240,6 +245,7 @@
 
                     });
                 </code>
+                </pre>
             </div>
 
         </div>

@@ -9,7 +9,7 @@ describe('TodoComponent with real service (Integration test)', function() {
 
     beforeEach(function() {
         let initialTodos = [];
-        let todoService = TodoService(initialTodos);
+        let todoService = new TodoService(initialTodos);
         component = new TodoComponent(todoService);
     });
 

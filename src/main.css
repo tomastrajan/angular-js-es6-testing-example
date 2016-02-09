@@ -60,3 +60,8 @@ ul {
 .todo .done {
     color: #006600;
 }
+
+user-info-component {
+    position: relative;
+    top: 15px;
+}

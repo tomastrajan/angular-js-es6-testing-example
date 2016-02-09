@@ -5,7 +5,7 @@ export function routing($urlRouterProvider, $stateProvider) {
     $stateProvider
         .state('app', {
             abstract: true,
-            template: '<div app-component></div>'
+            template: '<app-component></app-component>'
         })
 
 }

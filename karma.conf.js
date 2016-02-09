@@ -7,8 +7,8 @@ module.exports = function(config) {
         reporters:  ['mocha'],
 
         logLevel: config.LOG_INFO,
-        autoWatch: false,
-        singleRun: true,
+        autoWatch: true,
+        singleRun: false,
         colors: true,
         port: 9876,
 
@@ -32,6 +32,9 @@ module.exports = function(config) {
                     jQuery: 'jquery'
                 })
             ]
+        },
+        webpackMiddleware: {
+            noInfo: true
         }
     });
 };

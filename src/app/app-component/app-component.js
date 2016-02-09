@@ -1,5 +1,7 @@
 export default class AppComponent {
 
-    // nothing here yet ...
+    constructor() {
+        this.name = 'Tomas';
+    }
 
 }

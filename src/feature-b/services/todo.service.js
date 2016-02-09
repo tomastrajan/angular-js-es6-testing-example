@@ -1,33 +1,28 @@
 import * as _ from 'lodash';
 
-export default function TodoService(initialTodos) {
+export default class TodoService {
 
-    const todos = initialTodos;
+    constructor(initialTodos) {
+        this.todos = initialTodos;
+    }
 
-    return {
-        todos,
-        addTodo,
-        toggleTodo,
-        removeDoneTodos
-    };
-
-    function addTodo(label) {
+    addTodo(label) {
         let todo = {
             label,
             done: false
         };
-        todos.push(todo);
+        this.todos.push(todo);
     }
 
-    function toggleTodo(label) {
-        let toggledTodo = _.find(todos, function(todo) {
+    toggleTodo(label) {
+        let toggledTodo = _.find(this.todos, function(todo) {
             return todo.label === label;
         });
         toggledTodo.done = !toggledTodo.done;
     }
 
-    function removeDoneTodos() {
-        _.remove(todos, function(todo) {
+    removeDoneTodos() {
+        _.remove(this.todos, function(todo) {
             return todo.done;
         });
     }

@@ -13,7 +13,7 @@ var PARAMS_DEFAULT = {
     },
     entry: {
         main: './src/main.js',
-        vendor: ['lodash', 'jquery', 'bootstrap', 'angular', 'angular-animate', 'angular-ui-bootstrap', 'angular-highlightjs']
+        vendor: ['lodash', 'jquery', 'bootstrap', 'angular', 'angular-animate', 'angular-ui-bootstrap']
     },
     output: {
         filename: '[name].[chunkhash].js',

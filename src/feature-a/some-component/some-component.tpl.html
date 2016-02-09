@@ -1,12 +1,17 @@
 <div class="jumbotron">
     <h1>Feature A!</h1>
-    <h2>Feature A is implemented as Component using
-        "<a href="https://medium.com/@tomastrajan/component-paradigm-cf32e94ba78b">Component Pattern</a>"
+    <h2>
+        <s>
+            Feature A is implemented as Component using
+            "<a href="https://medium.com/@tomastrajan/component-paradigm-cf32e94ba78b">Component Pattern</a>"
+        </s><br /><br />
+        Feature A (and all other components) are implemented using native
+        <code>.component</code> API available since Angular JS 1.5
     </h2>
     <br />
     <p>Feature A is so great that it even contains counter functionality!</p>
     <ul>
-        <li><p>Counter: <strong>{{ctrl.counter}}</strong></p></li>
+        <li><p>Counter: <strong>{{$ctrl.counter}}</strong></p></li>
     </ul>
     <br />
     <p>The implemented counter functionality is tested in isolation without instantiating of Angular JS context</p>
@@ -14,7 +19,7 @@
     <hr />
 
     <button class="btn btn-info pull-right" ui-sref="app.feature-b">Try Feature B</button>
-    <button class="btn btn-success" ng-click="ctrl.increment()">Increment counter</button>
+    <button class="btn btn-success" ng-click="$ctrl.increment()">Increment counter</button>
     <a class="btn btn-default" data-toggle="collapse" href="#testCode" aria-expanded="false" aria-controls="collapseExample">Toggle test code</a>
 
     <br />

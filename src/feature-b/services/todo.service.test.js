@@ -8,7 +8,7 @@ describe('TodoService', function() {
 
     beforeEach(function() {
         let initialTodos = [];
-        service = TodoService(initialTodos);
+        service = new TodoService(initialTodos);
     });
 
     it('should contain empty todos after initialization', function () {

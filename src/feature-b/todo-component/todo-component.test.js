@@ -1,4 +1,3 @@
-import { assert } from 'chai';
 import * as sinon from 'sinon';
 
 import TodoComponent from './todo-component.js';
@@ -11,7 +10,7 @@ describe('TodoComponent with mocked service (unit test)', function() {
 
     beforeEach(function() {
         let initialTodos = [];
-        let TodoServiceInstance = TodoService(initialTodos);
+        let TodoServiceInstance = new TodoService(initialTodos);
         mockTodoService = sinon.mock(TodoServiceInstance);
         component = new TodoComponent(TodoServiceInstance);
     });
