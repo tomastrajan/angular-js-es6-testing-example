@@ -8,9 +8,6 @@ var CleanWebpackPlugin = require('clean-webpack-plugin');
 var OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 
 var PARAMS_DEFAULT = {
-    resolve: {
-        extensions: ['', '.js', '.tpl.html']
-    },
     entry: {
         main: './src/main.js',
         vendor: ['lodash', 'jquery', 'bootstrap', 'angular', 'angular-animate', 'angular-ui-bootstrap']
@@ -32,37 +29,39 @@ var PARAMS_DEFAULT = {
     ],
     devServer: {
         port: 8081
-    },
-    progress: true,
-    colors: true
+    }
 };
 var PARAMS_PER_TARGET = {
     DEV: {
-        debug: true,
         devtool: 'inline-source-map',
         output: {
             filename: '[name].js'
         },
         plugins: [
-            new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                filename: 'vendor.js'
+            }),
             new OpenBrowserWebpackPlugin({
                 url: 'http://localhost:' + PARAMS_DEFAULT.devServer.port
             })
         ]
     },
     BUILD: {
-        debug: true,
         output: {
             path: './build'
         },
         devtool: 'source-map',
         plugins: [
             new CleanWebpackPlugin(['build']),
-            new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[chunkhash].js', Infinity)
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                filename: 'vendor.[chunkhash].js',
+                minChunks: Infinity
+            })
         ]
     },
     DIST: {
-        debug: false,
         output: {
             path: './dist',
             // TODO remove hack-fix when gh-pages work again
@@ -70,7 +69,11 @@ var PARAMS_PER_TARGET = {
         },
         plugins: [
             new CleanWebpackPlugin(['dist']),
-            new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[chunkhash].js', Infinity),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'vendor',
+                filename: 'vendor.[chunkhash].js',
+                minChunks: Infinity
+            }),
             new webpack.optimize.UglifyJsPlugin({
                 mangle: false
             })
@@ -88,18 +91,15 @@ module.exports = {
     output: params.output,
     module: {
         loaders: [
-            {test: /\.js$/, loader: 'babel', exclude: /(\.test.js$|node_modules)/},
-            {test: /\.css$/, loader: 'style!css'},
-            {test: /\.tpl.html/, loader: 'html'},
-            {test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/, loader: 'url?limit=50000'}
+            {test: /\.js$/, loader: 'babel-loader', exclude: /(\.test.js$|node_modules)/},
+            {test: /\.css$/, loader: 'style-loader!css-loader'},
+            {test: /\.tpl.html/, loader: 'html-loader'},
+            {test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/, loader: 'url-loader?limit=50000'}
         ]
     },
     plugins: params.plugins,
     devServer: params.devServer,
-    debug: params.debug,
-    devtool: params.devtool,
-    progress: params.progress,
-    colors: params.colors
+    devtool: params.devtool
 };
 
 function _printBuildInfo(params) {
