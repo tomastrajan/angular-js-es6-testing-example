@@ -1,5 +1,4 @@
 var _ = require('lodash');
-var minimist = require('minimist');
 var chalk = require('chalk');
 var webpack = require('webpack');
 
@@ -77,7 +76,7 @@ var PARAMS_PER_TARGET = {
         ]
     }
 };
-var TARGET = minimist(process.argv.slice(2)).TARGET || 'BUILD';
+var TARGET = process.env.NODE_ENV || 'BUILD';
 var params = _.merge(PARAMS_DEFAULT, PARAMS_PER_TARGET[TARGET], _mergeArraysCustomizer);
 
 _printBuildInfo(params);
