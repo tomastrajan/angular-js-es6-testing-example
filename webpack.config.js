@@ -21,8 +21,9 @@ var PARAMS_DEFAULT = {
             inject: 'body'
         }),
         new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery'
+            // https://github.com/angular/angular.js/blob/v1.5.9/src/Angular.js#L1821-L1823
+            // http://blog.johnnyreilly.com/2016/05/the-mysterious-case-of-webpack-angular-and-jquery.html
+            'window.jQuery': 'jquery'
         }),
         new webpack.optimize.DedupePlugin()
     ],
