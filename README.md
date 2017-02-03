@@ -5,7 +5,7 @@ Great seed for enterprise projects with heavy focus on unit and integration test
 This repository contains two releases:
 
 1. `1.4.0` - for Angular JS 1.4 and lower (uses [Component Pattern for Angular JS](https://medium.com/@tomastrajan/component-paradigm-cf32e94ba78b))
-2. `1.5.0` - for Angular JS 1.5 and above which supports native `.componet(name, options)` API
+2. `1.5.0` - for Angular JS 1.5 and above which supports native `.component(name, options)` API
 
 ## Info
 
